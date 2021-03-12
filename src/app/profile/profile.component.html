@@ -1,0 +1,91 @@
+<div class="container" *ngIf="!loading" >
+	<div fxLayout="row" fxLayout.lt-sm="column" >
+		<div fxFlex="30%" fxFlex.lt-sm="100%" >
+	  	<img src={{user|avatarRender}} class="img-circle" width="160" />
+	  	<button mat-icon-button class="follow-button pull-left" *ngIf="!isMine&&isAuthenticated" (click)="follow()" >
+	  		<mat-icon color="primary" *ngIf="isFollowing">
+		  		favorite
+		  	</mat-icon>
+		  	<mat-icon color="primary" *ngIf="!isFollowing">
+		  		favorite_bordered
+		  	</mat-icon>
+	  	</button>	  	
+	  	<h2>{{user.name}}</h2>
+	  	<p>
+	  		<mat-icon color="primary">email</mat-icon> {{user.email}}
+	  	</p>
+	  	<p>
+	  		<mat-icon color="primary">phone</mat-icon> {{user.phone}}
+	  	</p>
+	  	<p>
+	  		<mat-icon color="primary">location_on</mat-icon> {{user.address}}
+	  	</p>
+	  	<br />
+	  	<div class="follow-div">
+	  		<mat-tab-group>
+				  <mat-tab label="Followings">
+				   	<mat-card *ngFor="let user of user.following;" >
+				   		<mat-card-content routerLink="/user/{{user.id}}" >
+				   			<img src={{user|avatarRender}} class="img-circle" />
+				   			<span class="pull-right">
+				   				{{user.name}}<br/>
+				   				<i>{{user.tagline | slice:0:30}}</i>
+				   			</span>
+				   		</mat-card-content>
+						</mat-card>
+				  </mat-tab>
+				  <mat-tab label="Followers">
+				  	<mat-card *ngFor="let user of user.followers;" >
+				   		<mat-card-content routerLink="/user/{{user.id}}"  >
+				   			<img src={{user|avatarRender}} class="img-circle" />
+				   			<span class="pull-right">
+				   				{{user.name}}<br/>
+				   				<i>{{user.tagline | slice:0:30}}</i>
+				   			</span>				   			
+				   		</mat-card-content>
+						</mat-card>
+				  </mat-tab>
+				</mat-tab-group>
+	  	</div>	  	
+
+	  </div>
+	  <div fxFlex="70%" fxFlex.lt-sm="100%" >
+	  	<h2>
+	  		{{user.tagline}}
+	  		<span class="pull-right">
+	  			<button mat-button routerLink="/edit/user/{{user.id}}" color="primary" *ngIf="isMine">
+	  				<mat-icon>edit</mat-icon>
+	  			</button>
+	  		</span>
+	  	</h2>
+	  	<mat-divider></mat-divider>
+	  	<div [innerHTML]="user.description">
+			</div>
+			<br /><br />
+			<h3>Skills</h3>
+			<mat-chip-list >
+				<mat-chip class="skill-chip" *ngFor="let skill of skills;" >{{skill}}</mat-chip>
+			</mat-chip-list>
+			<br/><br/>			
+			<postCard *ngFor="let post of posts" [post]="post" [user]="user" (delete)="deletePost($event)">
+			</postCard>
+			<br /><br />
+			<mat-card *ngIf="isMine">
+				<form [formGroup]="postForm" autocomplete="off" (ngSubmit)="createPost()" >					
+					<mat-card-content>
+						<mat-form-field>
+							<input matInput placeholder="Title" formControlName="title" />
+						</mat-form-field>
+						<quill-editor formControlName="content">						
+						</quill-editor>
+					</mat-card-content>
+					<mat-card-footer align="end" >
+						<button mat-raised-button type="button" (click)="resetPostForm()" >Cancel</button> &nbsp;
+						<button mat-raised-button type="submit" color="primary" [disabled]="!postForm.valid">Post</button>
+					</mat-card-footer>
+				</form>
+			</mat-card>
+	  </div>
+	</div>
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

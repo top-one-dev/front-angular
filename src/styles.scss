@@ -1,0 +1,173 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+html, body { height: 100%; overflow-x: hidden; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.container {
+  padding-right: 20px;
+  padding-left: 20px;
+  margin: 50px auto;
+}
+.img-circle{
+	border-radius: 50%;
+}
+.img-responsive{
+	max-width: 100%;
+}
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+.text-left{
+	text-align: left;
+}
+.pull-right{
+	float: right;
+}
+.pull-left{
+	float: left;
+}
+
+.user-form{
+	width: 320px;
+	margin: 100px auto;
+	img{
+		width: 220px;
+		margin: 30px 0;
+	}
+	*{
+		width: 100%;
+	}
+	button{
+		text-transform: uppercase;
+	}
+	mat-form-field{
+		margin: 10px 0;
+	}
+}
+
+.ql-container{
+	min-height: 200px;
+}
+.cropper-view-box, .cropper-face {
+  border-radius: 50%;
+}
+
+button.delete-button{
+	margin-right: -30px !important;
+	color: gray !important;
+}
+
+mat-card{
+	margin: 20px 0;
+  padding: 20px 30px !important;
+  form{
+  	mat-form-field{
+			width: 100%;
+		}
+  }
+  mat-card-title{
+  	margin-bottom: 30px !important;  	
+  	a{
+  		text-decoration: none;  		
+  	}	
+  }  
+  mat-card-footer{
+  	margin: 0 !important;
+  	color: gray;
+  	font-size: 12px;
+  	mat-icon{
+  		font-size: 15px !important;
+  		vertical-align: -webkit-baseline-middle;
+  	}
+  }
+}
+
+.homepage{
+	.post-comments{
+		display: none;
+	}
+	mat-card-content{
+		max-height: 300px;
+		overflow-y: hidden;
+	}
+}
+
+.post-user-avatar{
+	width: 40px;
+	vertical-align: bottom;
+}
+.post-user-name{
+	cursor: pointer;
+	font-size: 15px;
+	display: inline-block;
+	margin-left: 10px;
+	small{
+		display: block;
+		color: gray;
+		font-size: 11px;
+	}
+}
+.post-footer{
+	margin: 10px 0;
+	color: gray;
+  font-size: 12px;
+	mat-icon{
+		font-size: 15px !important;
+		vertical-align: -webkit-baseline-middle;
+	}
+}
+.post-content{
+	img{
+		max-width: 100%;
+	}
+}
+.post-comments{
+	mat-expansion-panel{
+		box-shadow: none !important;
+		margin: 10px 0;
+		mat-panel-title{
+			color: gray;
+		}
+	}
+}
+
+.post-comment-user{
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-top: 20px;
+	i{
+		font-size: 12px;
+		color: gray;
+	}
+	img.img-circle{
+		width: 40px;
+		vertical-align: bottom;
+		margin-right: 10px;
+	}
+	span{
+		display: inline-block;
+		cursor: pointer;
+	}
+}
+
+.post-comment-content{
+  border-radius: 4px;
+  background-color: #eee;
+  padding: 15px 20px;
+}
+
+.preview-span{
+	border-radius: 5px;
+	background-color: #ddd;
+	padding: 8px;
+	display: inline-block;
+	vertical-align: top;
+  img{
+  	width: 180px;
+  }
+}

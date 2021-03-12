@@ -1,0 +1,18 @@
+<div class="gallery-container" *ngIf="!isAuthenticated">
+	<ng-masonry-grid
+    [masonryOptions]="{ transitionDuration: '0.8s', gutter: 0 }" 
+    [useAnimation]="true"
+    [useImagesLoaded]="true"
+    [scrollAnimationOptions]="{ animationEffect: 'effect-3', minDuration : 0.4, maxDuration : 0.7 }"
+     >
+		<!-- Masonry Grid Item -->
+		<ng-masonry-grid-item id="{{'masonry-item-'+i}}" *ngFor="let item of masonryItems;"> 
+		  <img src="{{ item.src }}" alt="gallery image" />
+		</ng-masonry-grid-item>
+	</ng-masonry-grid>	
+</div>
+
+<div class="container homepage" *ngIf="isAuthenticated" >
+	<postCard *ngFor="let post of posts" [post]="post" >		
+	</postCard>
+</div>

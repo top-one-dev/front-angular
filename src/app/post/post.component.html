@@ -1,0 +1,6 @@
+<div class="container" *ngIf="!loading" >
+	<postCard [post]="post" >		
+	</postCard>	
+</div>
+
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

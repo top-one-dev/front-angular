@@ -1,0 +1,65 @@
+<mat-card>
+	<mat-card-title>
+		<a routerLink="/post/{{data.id}}" >
+			{{data.title}}
+		</a>
+		<button mat-button class="pull-right delete-button" *ngIf="isMine&&!data.user" (click)="deletePost()" >
+			<mat-icon>delete</mat-icon>
+		</button>
+		<span class="pull-right" *ngIf="data.user" >
+			<img src={{data.user|avatarRender}} class="img-circle post-user-avatar">
+			<span class="post-user-name" routerLink="/user/{{data.user.id}}">
+				{{data.user.name}}
+				<small>{{data.user.tagline | slice:0:30}}</small>
+			</span>
+		</span>
+		<span class="pull-right" *ngIf="user" >
+			<img src={{user|avatarRender}} class="img-circle post-user-avatar">
+			<span class="post-user-name" routerLink="/user/{{user.id}}">
+				{{user.name}}
+				<small>{{user.tagline | slice:0:30}}</small>
+			</span>
+		</span>								
+	</mat-card-title>	
+	<mat-card-content class="post-content" [innerHTML]="data.content"></mat-card-content>
+	<mat-card-footer align="end" >
+		<mat-icon>access_time</mat-icon>
+		{{data.created_at | amTimeAgo }}
+	</mat-card-footer>
+	<div class="post-comments" *ngIf="data.comments">
+		<mat-accordion>
+			<mat-expansion-panel>
+				<mat-expansion-panel-header>
+					<mat-panel-title>
+						Show {{data.comments.length}} comments...
+					</mat-panel-title>
+					<mat-panel-description>				        
+					</mat-panel-description>
+				</mat-expansion-panel-header>
+				<comment *ngFor="let comment of data.comments" [comment]="comment" [post]="data" (delete)="deleteComment($event)" >							
+				</comment>
+				<div *ngIf="isAuthenticated">
+					<form [formGroup]="commentForm" autocomplete="off" (ngSubmit)="createComment()" >		
+						<mat-form-field>
+					    <textarea matInput placeholder="Type comment..." formControlName="content" ></textarea>
+					  </mat-form-field>
+					  <div align="end">
+					  	<span class="preview-span" *ngIf="preview" >
+								<img [src]="preview" alt="preview" />
+							</span>
+							<button type="button" mat-button color="primary" (click)="fileInput.click()">
+								<mat-icon>photo_camera</mat-icon>
+							</button>
+							<input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="image/*" />
+						</div>
+						<br/>
+						<div align="end" >
+							<button mat-raised-button type="button" (click)="resetCommentForm()" >Cancel</button> &nbsp;
+							<button mat-raised-button type="submit" color="primary" [disabled]="!commentForm.valid" >Comment</button>
+						</div>
+					</form>
+				</div>				    
+			</mat-expansion-panel>
+		</mat-accordion>
+	</div>
+</mat-card>

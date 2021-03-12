@@ -1,0 +1,12 @@
+.gallery-container{
+	position: relative;
+  top: -50px;
+  margin: 0 -6.7% !important;
+}
+.grid {
+ 	margin-top: 0 !important;
+ 	ng-masonry-grid-item {
+			width: calc( ( 100% - 20px ) / 4 ) !important;
+			margin: 2.5px !important;
+	}
+}

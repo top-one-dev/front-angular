@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Edit Avatar</h1>
+<div mat-dialog-content>
+  <div class="text-center">
+    <img [src]="previewUrl" id="preview" width="180" >
+  </div>
+  <br />
+  <angular-cropper #angularCropper [cropperOptions]="config" [imageUrl]="data.imageUrl"></angular-cropper> 
+</div>
+<mat-dialog-actions align="end">
+  <button type="button" mat-raised-button (click)="fileInput.click()">Choose Other Image</button>&nbsp;&nbsp;
+  <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="image/*" />
+  <button mat-raised-button [mat-dialog-close]="true" (click)="save()" color="primary" cdkFocusInitial>Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,14 @@
+<div class="post-comment-user" >
+	<img src={{data.user|avatarRender}} class="img-circle" />
+	<span  routerLink="/user/{{data.user.id}}" >{{data.user.name}} <br/> <i>{{data.user.tagline}}</i></span>
+	<button mat-button class="pull-right delete-button" *ngIf="isMine" (click)="deleteReply()" >
+		<mat-icon>delete</mat-icon>
+	</button>
+	<span class="pull-right post-footer">
+		<mat-icon>access_time</mat-icon> {{data.created_at | amTimeAgo }}
+	</span>								
+</div>				    		
+<div class="post-comment-content" >
+	{{data.content}}<br/>
+	<img src={{data.attach.url}} class="img-responsive" *ngIf="data.attach.url" />
+</div>

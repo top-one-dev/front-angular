@@ -1,0 +1,20 @@
+<mat-card>
+	<mat-card-title>
+		{{user.name}}	<small class="user-tagline"><i>{{user.tagline}}</i></small>		
+	</mat-card-title>	
+	<mat-card-content>
+		<mat-grid-list cols="8" rowHeight="1:1">
+		  <mat-grid-tile>
+		  	<img src={{user|avatarRender}} class="img-circle img-responsive" width="150" />
+		  </mat-grid-tile>
+		  <mat-grid-tile colspan="7">
+		  	<p [innerHTML]="user.description" class="user-description"></p>
+		  </mat-grid-tile>
+		</mat-grid-list>
+	</mat-card-content>
+	<mat-card-footer align="end" >
+		<mat-chip-list >
+			<mat-chip class="skill-chip" *ngFor="let skill of skills;" >{{skill}}</mat-chip>
+		</mat-chip-list>
+	</mat-card-footer>
+</mat-card>

@@ -1,0 +1,45 @@
+<mat-toolbar color="primary" class="navbar" *ngIf="!loading">
+  <span><a routerLink="/home">{{ title }}</a></span>
+  <span class="toolbar-search">
+  	<form [formGroup]="searchForm" (ngSubmit)="search()" >
+	  	<mat-icon>search</mat-icon>
+		  <input autocomplete="off" formControlName="query" placeholder="Search..." />
+		</form>
+  </span>
+  <span class="example-fill-remaining-space"></span>
+  <span>
+  	<button mat-icon-button matBadge={{user.posts.length}} matBadgePosition="after" matBadgeColor="accent" *ngIf="isAuthenticated" >
+	    <mat-icon>mail</mat-icon>
+	  </button>
+	  <button mat-icon-button matBadge={{user.id}} matBadgePosition="after" matBadgeColor="accent" *ngIf="isAuthenticated" routerLink="/message" >
+	    <mat-icon>notifications</mat-icon>
+	  </button>
+	  <button mat-icon-button [matMenuTriggerFor]="navMenu" >
+	  	<img src={{user|avatarRender}} class="img-circle" *ngIf="isAuthenticated" >
+	  	<mat-icon *ngIf="!isAuthenticated">person</mat-icon>
+	  </button>
+	  <mat-menu #navMenu="matMenu" >
+	  	<span *ngIf="isAuthenticated; else logIn">
+	  		<a mat-menu-item routerLink="/user/{{user.id}}" class="nav-menu">
+	  			Profile
+	  		</a>
+		  	<button mat-menu-item class="nav-menu" (click)="logout()">Log Out</button>
+	  	</span>
+	  	<ng-template #logIn>
+	  		<a mat-menu-item routerLink="/login" class="nav-menu">
+	  			Log In
+	  		</a>
+		  </ng-template>
+		</mat-menu>
+	</span>
+</mat-toolbar>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="container" *ngIf="!loading" >
+	<div fxLayout="row" fxLayout.lt-sm="column" >
+		<div fxFlex="5%" fxFlex.lt-sm="100%"></div>
+		<div fxFlex="90%" fxFlex.lt-sm="100%" >
+			<router-outlet></router-outlet>
+		</div>
+		<div fxFlex="5%" fxFlex.lt-sm="100%"></div>
+	</div>
+</div>

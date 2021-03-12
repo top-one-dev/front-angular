@@ -1,0 +1,16 @@
+.edit-user {
+	mat-form-field{
+		width: 80%;
+	}
+	.avatar-img{
+		cursor: pointer;
+		&:hover{
+			box-shadow: 0 0 10px 1px gray;
+		}
+	}
+	.pull-right{
+		button{
+			margin: 0 5px;
+		}
+	}
+}

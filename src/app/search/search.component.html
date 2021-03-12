@@ -1,0 +1,12 @@
+<div class="container homepage" *ngIf="!loading" >
+	<user-card *ngFor="let user of users;" [user]="user" >
+	</user-card>
+	<postCard *ngFor="let post of posts;" [post]="post" >
+	</postCard>
+	<div *ngIf="users.length==0">
+		<div *ngIf="posts.length==0" class="text-center">
+			<img src="https://www.westcomotors.com.au/site/user-assets/images/no-results.png" class="img-responsive" />
+		</div>
+	</div>
+</div>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

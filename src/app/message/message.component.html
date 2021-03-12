@@ -1,0 +1,44 @@
+<mat-drawer-container class="message-container" *ngIf="!loading">
+  <mat-drawer mode="side" opened>
+  	<div class="message-title">
+  	</div>
+  	<div class="message-user" 
+  				*ngFor="let user of users" (click)="selectUser(user.id)" 
+  				[ngClass]="{'selected': user.id === selectedUser.id }" >
+   		<img src={{user|avatarRender}} class="img-circle" />
+ 			<span class="pull-right">
+ 				{{user.name}}<br/>
+ 				<i>{{user.tagline | slice:0:30}}</i>
+ 			</span>
+		</div>
+  </mat-drawer>
+  <mat-drawer-content>
+  	<div class="message-title">
+  		<div class="message-user" >
+	   		<img src={{selectedUser|avatarRender}} class="img-circle" />
+	 			<span class="pull-right">
+	 				{{selectedUser.name}}<br/>
+	 				<i>{{selectedUser.tagline}}</i>
+	 			</span>
+			</div>
+  	</div>
+  	<div class="message-area">
+  		<div *ngFor="let msg of messages;" [ngClass]="{'partner': msg.user.id === selectedUser.id, 'owner': msg.user.id !== selectedUser.id}" >
+  			<span *ngIf="msg.user.id === selectedUser.id" >
+  				<img src={{msg.user.avatar}} class='img-circle online' *ngIf="msg.user.avatar" />
+       		<img src={{msg.user.picture}} class='img-circle online' *ngIf="!msg.user.avatar&&msg.user.picture" />
+  			</span>       
+        <span class="message-content">
+          {{msg.content}}<br/>
+          <img src={{msg.attach.url}} class="img-responsive" alt="message_img" *ngIf="msg.attach.url" />
+        </span>                
+       </div>
+  	</div>
+  	<div class="message-form">
+		  <mat-form-field>
+		    <input matInput autocomplete="off" placeholder="Type message..." >
+		  </mat-form-field>
+  	</div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>

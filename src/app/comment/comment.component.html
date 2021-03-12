@@ -1,0 +1,49 @@
+<div>
+	<div class="post-comment-user">
+		<img src={{data.user|avatarRender}} class="img-circle" />
+		<span  routerLink="/user/{{data.user.id}}" >{{data.user.name}} <br/> <i>{{data.user.tagline}}</i></span>
+		<button mat-button class="pull-right delete-button" *ngIf="isMine" (click)="deleteComment()" >
+			<mat-icon>delete</mat-icon>
+		</button>
+		<span class="pull-right post-footer">
+			<mat-icon>access_time</mat-icon> {{data.created_at | amTimeAgo }}
+		</span>									
+	</div>				    		
+	<div class="post-comment-content">
+		{{data.content}}<br/>
+		<img src={{data.attach.url}} class="img-responsive" *ngIf="data.attach.url" />
+	</div>				    		
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+			<mat-panel-title>
+				Show {{data.replies.length}} replies...
+			</mat-panel-title>
+			<mat-panel-description>				        
+			</mat-panel-description>
+		</mat-expansion-panel-header>
+		<reply *ngFor="let reply of data.replies" [reply]="reply" [comment]="data" [post]="post" (delete)="deleteReply($event)" >							
+		</reply>
+		<br /><br />
+		<div *ngIf="isAuthenticated">
+			<form [formGroup]="replyForm" autocomplete="off" (ngSubmit)="createReply()" >		
+				<mat-form-field>
+			    <textarea matInput placeholder="Type reply..." formControlName="content" ></textarea>
+			  </mat-form-field>
+			  <div align="end">
+			  	<span class="preview-span" *ngIf="preview" >
+						<img [src]="preview" alt="preview" />
+					</span>
+					<button type="button" mat-button color="primary" (click)="fileInput.click()">
+						<mat-icon>photo_camera</mat-icon>
+					</button>
+					<input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="image/*" />
+				</div>
+				<br/>
+				<div align="end" >
+					<button mat-raised-button type="button" (click)="resetReplyForm()" >Cancel</button> &nbsp;
+					<button mat-raised-button type="submit" color="primary" [disabled]="!replyForm.valid">Reply</button>
+				</div>
+			</form>
+		</div>			    
+	</mat-expansion-panel>
+</div>

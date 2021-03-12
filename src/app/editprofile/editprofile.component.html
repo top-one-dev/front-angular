@@ -1,0 +1,51 @@
+<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="container edit-user" *ngIf="!loading" >
+	<div fxLayout="row" fxLayout.lt-sm="column" >
+		<form [formGroup]="userForm" autocomplete="off" (ngSubmit)="updateProfile()" >		
+			<div fxFlex="30%" fxFlex.lt-sm="100%" >
+				<img [src]="avatar" class="img-circle avatar-img" width="150" (click)="openDialog()" />  	
+				<br /><br />
+				<mat-form-field>
+					<input matInput placeholder="Name" formControlName="name" />
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Email" type="email" formControlName="email" />
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Phone" type="tel" formControlName="phone" />
+				</mat-form-field>
+				<mat-form-field>
+					<input matInput placeholder="Address" formControlName="address" />
+				</mat-form-field>
+			</div>
+			<div fxFlex="70%" fxFlex.lt-sm="100%" >
+				<span class="pull-right">
+					<button mat-raised-button routerLink="/user/{{user.id}}" >
+						Cancel
+					</button>
+					<button mat-raised-button color="primary">
+						Save
+					</button>
+				</span>
+				<mat-form-field>
+					<input matInput placeholder="Tagline" formControlName="tagline" />
+				</mat-form-field>
+				<div>
+					<quill-editor formControlName="description" >						
+					</quill-editor>
+				</div>
+				<br /><br />
+				<h3>Skills</h3>
+				<ng-select
+					[items]			= "skills"
+					[multiple]	= "true"
+					[addTag]		= "true"
+					[searchable]= "true"
+					bindLabel		= "label"
+					placeholder	= "Select skills"
+					formControlName="skills" >
+				</ng-select>
+			</div>
+		</form>
+	</div>	
+</div>

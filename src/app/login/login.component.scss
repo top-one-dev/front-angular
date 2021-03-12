@@ -1,0 +1,15 @@
+mat-spinner{
+	margin: 0 auto;
+}
+.social-login{
+	text-align: center;
+	img{
+		width: 48px;
+		margin: 15px;
+		transition: .3s all ease;
+		cursor: pointer;
+		&:hover{
+			transform: scale(1.2);
+		}
+	}
+}
